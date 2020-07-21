@@ -6,7 +6,13 @@ header{
 background: radial-gradient(circle, rgb(12, 5, 3) 25%, rgba(224,5,49,1) 100%);
 }
 main{
-   
+    margin-bottom: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+   display: flex;
+   margin-left:130px ;
+   margin-top: 30px;
     color:rgb(58, 15, 15);
     text-align: center;
 

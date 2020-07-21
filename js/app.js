@@ -1,13 +1,53 @@
 
 'use strict'
 
-$.get('data/page-1.json').then(data => {
-    // console.log(data);
-    data.forEach(element => {
+$.get('data/page-1.json').then(data1 => {
+    
+    data1.forEach(element => {
+        let select = new Select(element.image_url, element.title, element.description, element.keyword, element.horns);
+        select.render();
+    });
+});
+
+$.get('data/page-2.json').then(data2 => {
+   
+    data2.forEach(element => {
+        let select = new Select(element.image_url, element.title, element.description, element.keyword, element.horns);
+        select.render();
+
+    });
+    
+});
+
+$("#pag1").click(function(){
+    
+    $.get('data/page-1.json').then(data1 => {
+        $('main section').fadeIn(1000);
+        $('main section').remove();
+    data1.forEach(element => {
         let select = new Select(element.image_url, element.title, element.description, element.keyword, element.horns);
         select.render();
         select.renderOption();
+       
     });
+    
+});
+});
+
+
+
+$("#pag2").click(function(){
+    $.get('data/page-2.json').then(data2 => {
+        $('main section').fadeIn(1000);
+        $('main section').remove();
+    data2.forEach(element => {
+        let select = new Select(element.image_url, element.title, element.description, element.keyword, element.horns);
+        select.render();
+        select.renderOption();
+     
+    });
+    
+});
 });
 
 function Select(image_url, title, description, keyword, horns) {
@@ -56,7 +96,6 @@ Select.prototype.renderOption = function () {
     itemSelect.append(innerHtml);
 
 }
-function show (){
     $('select').change(function(){
         let chosen = $(this).val(); //select the value chosen
         console.log(chosen)
@@ -70,5 +109,4 @@ function show (){
 
 
 
-}
-  show();
+
