@@ -61,19 +61,14 @@ function Select(image_url, title, description, keyword, horns) {
 
 
 Select.prototype.render = function () {
-    
-    let element = $('<section></section>');
-    element.attr('class', this.keyword)
-  
-    let innerHtml = `
-    <h2>${this.title}</h2>
-    <img src="${this.image_url}", width="150px" height="150px">
-    <p>${this.description}</p>`;
-    element.append(innerHtml);
-  
-    $('main').append(element);
-    console.log($(element))
-};
+    // get template from html
+    let mustacheTemplate = $('#template').html();
+    // map the object data to the template 
+    let newObject = Mustache.render(mustacheTemplate, this);
+    // append the object to the main
+    $('main').append(newObject);
+}
+
 
 
 
