@@ -15,3 +15,17 @@ main section{
     border: double rgb(158, 4, 4);
 }
 
+button{
+    background-color: black;
+    color: blanchedalmond;
+    font-family: monospace;
+    
+}
+button:hover{
+    background-color: cornsilk;
+    color: black;
+    font-family: monospace;
+    
+    
+
+}
