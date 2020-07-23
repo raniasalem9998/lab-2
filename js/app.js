@@ -1,6 +1,6 @@
 
 'use strict'
-
+let allAray = [];
 $.get('data/page-1.json').then(data1 => {
     
     data1.forEach(element => {
@@ -20,7 +20,7 @@ $.get('data/page-2.json').then(data2 => {
 });
 
 $("#pag1").click(function(){
-    
+    allAray=[];
     $.get('data/page-1.json').then(data1 => {
         $('main section').fadeIn(1000);
         $('main section').remove();
@@ -37,6 +37,7 @@ $("#pag1").click(function(){
 
 
 $("#pag2").click(function(){
+allAray=[];
     $.get('data/page-2.json').then(data2 => {
         $('main section').fadeIn(1000);
         $('main section').remove();
@@ -56,6 +57,8 @@ function Select(image_url, title, description, keyword, horns) {
         this.description = description;
         this.keyword = keyword;
         this.horns = horns;
+
+        allAray.push(this);
 };
 
 
@@ -101,6 +104,42 @@ Select.prototype.renderOption = function () {
         
         console.log($(`.${chosen}`)) //shows the selected  
     });
+
+    $('select').change(function(){
+        let chosen = $(this).val(); 
+        console.log(chosen)
+        
+        $('main section').hide(1000); 
+    
+        $(`.${chosen}`).fadeIn();
+        
+        console.log($(`.${chosen}`))
+    });
+
+
+    $("#sortByHorns").click(function () {
+        allAray.sort(sortByHorns);
+        $('main').empty();
+        allAray.forEach(element => {
+            element.render();
+        });
+        console.log(allAray)
+    });
+    function sortByHorns(a, b) {
+        return (a.horns - b.horns);
+    }
+
+    $("#sortByTitle").click(function () {
+        allAray.sort(sortByTitle);
+        $('main').empty();
+        allAray.forEach(element => {
+            element.render();
+        });
+        console.log(imageArr)
+    });
+    function sortByTitle(a, b) {
+        return (a.title.localeCompare(b.title));
+    }
 
 
 

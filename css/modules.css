@@ -19,3 +19,17 @@ img{
     width: 150px;
 height: 150px;;
 }
+button{
+    background-color: black;
+    color: blanchedalmond;
+    font-family: monospace;
+    
+}
+button:hover{
+    background-color: cornsilk;
+    color: black;
+    font-family: monospace;
+    
+    
+
+}
