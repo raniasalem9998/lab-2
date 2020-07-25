@@ -2,7 +2,6 @@
 'use strict'
 
 let allAray = [];
- 
 $.get('data/page-1.json').then(data1 => {
     
     data1.forEach(element => {
@@ -59,25 +58,21 @@ function Select(image_url, title, description, keyword, horns) {
         this.description = description;
         this.keyword = keyword;
         this.horns = horns;
+
         allAray.push(this);
 };
 
 
 
 Select.prototype.render = function () {
-    
-    let element = $('<section></section>');
-    element.attr('class', this.keyword)
-  
-    let innerHtml = `
-    <h2>${this.title}</h2>
-    <img src="${this.image_url}", width="150px" height="150px">
-    <p>${this.description}</p>`;
-    element.append(innerHtml);
-  
-    $('main').append(element);
-    console.log($(element))
-};
+    // get template from html
+    let mustacheTemplate = $('#template').html();
+    // map the object data to the template 
+    let newObject = Mustache.render(mustacheTemplate, this);
+    // append the object to the main
+    $('main').append(newObject);
+}
+
 
 
 
@@ -110,6 +105,42 @@ Select.prototype.renderOption = function () {
         
         console.log($(`.${chosen}`))
     });
+
+    $('select').change(function(){
+        let chosen = $(this).val(); 
+        console.log(chosen)
+        
+        $('main section').hide(1000); 
+    
+        $(`.${chosen}`).fadeIn();
+        
+        console.log($(`.${chosen}`))
+    });
+
+
+    $("#sortByHorns").click(function () {
+        allAray.sort(sortByHorns);
+        $('main').empty();
+        allAray.forEach(element => {
+            element.render();
+        });
+        console.log(allAray)
+    });
+    function sortByHorns(a, b) {
+        return (a.horns - b.horns);
+    }
+
+    $("#sortByTitle").click(function () {
+        allAray.sort(sortByTitle);
+        $('main').empty();
+        allAray.forEach(element => {
+            element.render();
+        });
+        console.log(imageArr)
+    });
+    function sortByTitle(a, b) {
+        return (a.title.localeCompare(b.title));
+    }
 
 
     $("#sortByHorns").click(function () {

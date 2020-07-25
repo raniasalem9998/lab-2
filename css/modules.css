@@ -15,6 +15,11 @@ main section{
     border: double rgb(158, 4, 4);
 }
 
+
+img{
+    width: 150px;
+height: 150px;;
+}
 button{
     background-color: black;
     color: blanchedalmond;
