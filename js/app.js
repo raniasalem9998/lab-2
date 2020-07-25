@@ -1,5 +1,6 @@
 
 'use strict'
+
 let allAray = [];
 $.get('data/page-1.json').then(data1 => {
     
@@ -95,14 +96,14 @@ Select.prototype.renderOption = function () {
 
 }
     $('select').change(function(){
-        let chosen = $(this).val(); //select the value chosen
+        let chosen = $(this).val(); 
         console.log(chosen)
         
-        $('main section').hide(1000); //hides everything
+        $('main section').hide(1000); 
     
-        $(`.${chosen}`).fadeIn();//to show the selected but it doesnt work
+        $(`.${chosen}`).fadeIn();
         
-        console.log($(`.${chosen}`)) //shows the selected  
+        console.log($(`.${chosen}`))
     });
 
     $('select').change(function(){
@@ -142,5 +143,27 @@ Select.prototype.renderOption = function () {
     }
 
 
+    $("#sortByHorns").click(function () {
+        allAray.sort(sortByHorns);
+        $('main').empty();
+        allAray.forEach(element => {
+            element.render();
+        });
+        console.log(allAray)
+    });
+    function sortByHorns(a, b) {
+        return (a.horns - b.horns);
+    }
 
+    $("#sortByTitle").click(function () {
+        allAray.sort(sortByTitle);
+        $('main').empty();
+        allAray.forEach(element => {
+            element.render();
+        });
+        console.log(imageArr)
+    });
+    function sortByTitle(a, b) {
+        return (a.title.localeCompare(b.title));
+    }
 
